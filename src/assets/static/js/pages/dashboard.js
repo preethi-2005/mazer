@@ -1,167 +1,153 @@
-var optionsProfileVisit = {
-  annotations: {
-    position: "back",
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  chart: {
-    type: "bar",
-    height: 300,
-  },
-  fill: {
-    opacity: 1,
-  },
-  plotOptions: {},
-  series: [
-    {
-      name: "sales",
-      data: [9, 20, 30, 20, 10, 20, 30, 20, 10, 20, 30, 20],
-    },
-  ],
-  colors: "#435ebe",
-  xaxis: {
-    categories: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-  },
-}
-let optionsVisitorsProfile = {
-  series: [70, 30],
-  labels: ["Male", "Female"],
-  colors: ["#435ebe", "#55c6e8"],
-  chart: {
-    type: "donut",
-    width: "100%",
-    height: "350px",
-  },
-  legend: {
-    position: "bottom",
-  },
-  plotOptions: {
-    pie: {
-      donut: {
-        size: "30%",
+// Wait for data
+fetch('/data/data.json')
+  .then(res => res.json())
+  .then(data => {
+
+    // 🛑 SAFETY CHECK (important)
+    if (!data.charts || !data.charts.profileVisit) {
+      document.querySelector("#chart-profile-visit").innerHTML = "No data available";
+      return;
+    }
+
+    // ----------------------
+    // 1. MAIN BAR CHART (DYNAMIC)
+    // ----------------------
+    const profileVisitOptions = {
+      series: [{
+        name: "Visits",
+        data: data.charts.profileVisit
+      }],
+      chart: {
+        type: "bar",
+        height: 300,
+        toolbar: { show: false },
+        animations: {
+          enabled: true,
+          easing: "easeinout",
+          speed: 800
+        }
       },
-    },
-  },
+      colors: ["#435ebe"],
+      plotOptions: {
+        bar: {
+          borderRadius: 6,
+          columnWidth: "50%"
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: data.charts.months
+      },
+      tooltip: {
+        theme: "dark",
+        y: {
+          formatter: (val) => val + " visits"
+        }
+      }
+    };
+
+    const chartEl = document.querySelector("#chart-profile-visit");
+
+let chart = new ApexCharts(chartEl, profileVisitOptions);
+chart.render();
+const filter = document.getElementById("chartFilter");
+
+if (filter) {
+  filter.addEventListener("change", (e) => {
+    if (e.target.value === "weekly") {
+      chart.updateOptions({
+        series: [{
+          data: [5, 10, 8, 12, 7, 9, 11]
+        }],
+        xaxis: {
+          categories: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+        }
+      });
+    } else {
+      chart.updateOptions({
+        series: [{
+          data: data.charts.profileVisit
+        }],
+        xaxis: {
+          categories: data.charts.months
+        }
+      });
+    }
+  });
 }
 
-var optionsEurope = {
-  series: [
-    {
-      name: "series1",
-      data: [310, 800, 600, 430, 540, 340, 605, 805, 430, 540, 340, 605],
-    },
-  ],
-  chart: {
-    height: 80,
-    type: "area",
-    toolbar: {
-      show: false,
-    },
-  },
-  colors: ["#5350e9"],
-  stroke: {
-    width: 2,
-  },
-  grid: {
-    show: false,
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  xaxis: {
-    type: "datetime",
-    categories: [
-      "2018-09-19T00:00:00.000Z",
-      "2018-09-19T01:30:00.000Z",
-      "2018-09-19T02:30:00.000Z",
-      "2018-09-19T03:30:00.000Z",
-      "2018-09-19T04:30:00.000Z",
-      "2018-09-19T05:30:00.000Z",
-      "2018-09-19T06:30:00.000Z",
-      "2018-09-19T07:30:00.000Z",
-      "2018-09-19T08:30:00.000Z",
-      "2018-09-19T09:30:00.000Z",
-      "2018-09-19T10:30:00.000Z",
-      "2018-09-19T11:30:00.000Z",
-    ],
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-    labels: {
-      show: false,
-    },
-  },
-  show: false,
-  yaxis: {
-    labels: {
-      show: false,
-    },
-  },
-  tooltip: {
-    x: {
-      format: "dd/MM/yy HH:mm",
-    },
-  },
-}
+    // ----------------------
+    // 2. MINI CHARTS
+    // ----------------------
+    function createMiniChart(id, color, chartData) {
+      const options = {
+        series: [{ data: chartData }],
+        chart: {
+          type: "area",
+          height: 80,
+          sparkline: { enabled: true }
+        },
+        stroke: {
+          curve: "smooth",
+          width: 2
+        },
+        fill: {
+          opacity: 0.3
+        },
+        colors: [color],
+        tooltip: {
+          theme: "dark"
+        }
+      };
 
-let optionsAmerica = {
-  ...optionsEurope,
-  colors: ["#008b75"],
-}
-let optionsIndia = {
-  ...optionsEurope,
-  colors: ["#ffc434"],
-}
-let optionsIndonesia = {
-  ...optionsEurope,
-  colors: ["#dc3545"],
-}
+      new ApexCharts(document.querySelector(id), options).render();
+    }
 
-var chartProfileVisit = new ApexCharts(
-  document.querySelector("#chart-profile-visit"),
-  optionsProfileVisit
-)
-var chartVisitorsProfile = new ApexCharts(
-  document.getElementById("chart-visitors-profile"),
-  optionsVisitorsProfile
-)
-var chartEurope = new ApexCharts(
-  document.querySelector("#chart-europe"),
-  optionsEurope
-)
-var chartAmerica = new ApexCharts(
-  document.querySelector("#chart-america"),
-  optionsAmerica
-)
-var chartIndia = new ApexCharts(
-  document.querySelector("#chart-india"),
-  optionsIndia
-)
-var chartIndonesia = new ApexCharts(
-  document.querySelector("#chart-indonesia"),
-  optionsIndonesia
-)
+    createMiniChart("#chart-europe", "#435ebe", data.charts.europe);
+    createMiniChart("#chart-america", "#28a745", data.charts.america);
+    createMiniChart("#chart-india", "#ffc107", data.charts.india);
+    createMiniChart("#chart-indonesia", "#dc3545", data.charts.indonesia);
 
-chartIndonesia.render()
-chartAmerica.render()
-chartIndia.render()
-chartEurope.render()
-chartProfileVisit.render()
-chartVisitorsProfile.render()
+
+    // ----------------------
+    // 3. DONUT CHART
+    // ----------------------
+    const visitorOptions = {
+      series: data.charts.visitors,
+      labels: ["Male", "Female"],
+      chart: {
+        type: "donut",
+        height: 250
+      },
+      colors: ["#435ebe", "#55c6e8"],
+      legend: {
+        position: "bottom"
+      },
+      dataLabels: {
+        enabled: true
+      }
+    };
+
+    new ApexCharts(
+      document.querySelector("#chart-visitors-profile"),
+      visitorOptions
+    ).render();
+
+
+    // ----------------------
+    // 4. SMOOTH CARD HOVER (clean version)
+    // ----------------------
+    document.querySelectorAll(".card").forEach(card => {
+      card.style.transition = "all 0.25s ease";
+      card.addEventListener("mouseenter", () => {
+        card.style.transform = "translateY(-5px)";
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "translateY(0)";
+      });
+    });
+
+  })
+  .catch(err => console.error("Data load error:", err));

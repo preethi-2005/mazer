@@ -19,3 +19,209 @@ body .bi::before, [class^=bi-]::before, [class*=" bi-"]::before {
 
 // Mazer CSS
 @import "./mazer";
+
+.card {
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+#app {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+body {
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+}
+.card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+.card:hover {
+  transform: translateY(-6px);
+  transition: 0.3s;
+}
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 16px;
+  }
+}
+#sidebar {
+  backdrop-filter: blur(10px);
+}
+table tr:hover {
+  background-color: rgba(0,0,0,0.03);
+}
+.page-content {
+  padding: 20px;
+}
+.stat-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.bg-purple { background: #6c5ce7; }
+.bg-blue { background: #0984e3; }
+.bg-green { background: #00b894; }
+.bg-red { background: #d63031; }
+
+.sidebar-wrapper .menu .sidebar-item a:hover {
+  background: rgba(67, 94, 190, 0.1);
+  border-radius: 8px;
+}
+#usersTable tr {
+  transition: all 0.2s ease;
+}
+
+#usersTable tr:hover {
+  background-color: rgba(0,0,0,0.04);
+}
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-weight: 600;
+}
+.icon-box {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.bg-blue { background: #435ebe; }
+.bg-green { background: #28a745; }
+.bg-red { background: #dc3545; }
+.bg-purple { background: #6f42c1; }
+
+body.dark,
+body.dark #app,
+body.dark #main {
+  background: #0f172a !important;
+  color: #e2e8f0;
+}
+
+body.dark .card {
+  background: #1e1e2f;
+  color: #e2e8f0;
+  border: 1px solid #2d2d3a;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+body.dark .apexcharts-canvas {
+  background: transparent;
+}
+body.dark .table {
+  color: #e2e8f0;
+}
+
+body.dark .sidebar-wrapper {
+  background: #111827;
+}
+
+body.dark .form-select,
+body.dark .form-control {
+  background: #1e1e2f;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+}
+/* Fix card sections in dark mode */
+
+body.dark .card-header {
+  background: #1e1e2f !important;
+  color: #e2e8f0 !important;
+  border-bottom: 1px solid #2d2d3a;
+}
+
+body.dark .card-body {
+  background: #1e1e2f !important;
+}
+
+body.dark .card-footer {
+  background: #1e1e2f !important;
+}
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6 {
+  color: #e2e8f0;
+}
+.sidebar-wrapper .menu .sidebar-item.active > .sidebar-link {
+  background: linear-gradient(135deg, #435ebe, #6f42c1);
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(67, 94, 190, 0.4);
+}
+.sidebar-wrapper .menu .sidebar-link {
+  transition: all 0.25s ease;
+}
+
+.sidebar-wrapper .menu .sidebar-link:hover {
+  transform: translateX(5px);
+  background: rgba(67, 94, 190, 0.1);
+}
+.sidebar-wrapper .menu .sidebar-link i {
+  margin-right: 10px;
+}
+body {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+/* ===== SHIMMER LOADER ===== */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background: #e0e0e0;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  height: 100%;
+  width: 150%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.5),
+    transparent
+  );
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    left: 150%;
+  }
+}

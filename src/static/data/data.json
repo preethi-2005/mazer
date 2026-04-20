@@ -1,0 +1,26 @@
+{
+  "stats": {
+    "views": 5000,
+    "followers": 1200,
+    "following": 800,
+    "posts": 75
+  },
+
+  "charts": {
+    "months": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+
+    "profileVisit": [10, 20, 15, 30, 25, 18, 28, 22, 19, 24, 30, 27],
+
+    "europe": [10, 25, 15, 30, 22, 28, 18],
+    "america": [5, 15, 10, 20, 18, 12, 16],
+    "india": [8, 18, 12, 25, 20, 22, 19],
+    "indonesia": [12, 22, 18, 28, 24, 26, 21],
+
+    "visitors": [70, 30]
+  },
+
+  "users": [
+    { "name": "John Doe", "email": "john@example.com", "role": "Admin" },
+    { "name": "Sara Khan", "email": "sara@example.com", "role": "User" }
+  ]
+}

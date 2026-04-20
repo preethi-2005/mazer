@@ -4,94 +4,81 @@
 {% extends 'src/layouts/master.html' %}
 
 {% block styles %}
-<link rel="stylesheet" href="/assets/scss/iconly.scss">
+<link rel="stylesheet" href="/src/assets/scss/iconly.scss">
 {% endblock %}
 
 {% block content %}
 <div class="page-heading">
     <h3>Profile Statistics</h3>
 </div> 
-<div class="page-content"> 
+<div class="row g-4"> 
     <section class="row">
         <div class="col-12 col-lg-9">
             <div class="row">
                 <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
+                    <div class="card p-3">
                         <div class="card-body px-4 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                    <div class="stats-icon purple mb-2">
-                                        <i class="iconly-boldShow"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Profile Views</h6>
-                                    <h6 class="font-extrabold mb-0">112.000</h6>
-                                </div>
-                            </div> 
+                            <div class="card stat-card">
+  <div class="card-body d-flex align-items-center justify-content-between">
+    <div>
+      <h6 class="text-muted">Profile Views</h6>
+      <h3 id="views" class="fw-bold shimmer">----</h3>
+    </div>
+    <div class="icon-box bg-purple">
+      <i class="iconly-boldShow"></i>
+    </div>
+  </div>
+</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card"> 
-                        <div class="card-body px-4 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                    <div class="stats-icon blue mb-2">
-                                        <i class="iconly-boldProfile"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Followers</h6>
-                                    <h6 class="font-extrabold mb-0">183.000</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="card p-3">
+    <div class="card-body text-center">
+      <div class="icon-box bg-blue mx-auto mb-2">
+        <i class="iconly-boldProfile"></i>
+      </div>
+      <h6 class="text-muted">Followers</h6>
+      <h3 id="followers" class="fw-bold">0</h3>
+    </div>
+  </div>
+</div>
                 <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body px-4 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                    <div class="stats-icon green mb-2">
-                                        <i class="iconly-boldAdd-User"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Following</h6>
-                                    <h6 class="font-extrabold mb-0">80.000</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="card p-3">
+    <div class="card-body text-center">
+      <div class="icon-box bg-green mx-auto mb-2">
+        <i class="iconly-boldAdd-User"></i>
+      </div>
+      <h6 class="text-muted">Following</h6>
+      <h3 id="following" class="fw-bold">0</h3>
+    </div>
+  </div>
+</div>
                 <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body px-4 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                    <div class="stats-icon red mb-2">
-                                        <i class="iconly-boldBookmark"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Saved Post</h6>
-                                    <h6 class="font-extrabold mb-0">112</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="card p-3">
+    <div class="card-body text-center">
+      <div class="icon-box bg-red mx-auto mb-2">
+        <i class="iconly-boldBookmark"></i>
+      </div>
+      <h6 class="text-muted">Saved Post</h6>
+      <h3 id="posts" class="fw-bold">0</h3>
+    </div>
+  </div>
+</div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>Profile Visit</h4>
-                        </div>
+                        <div class="card-header d-flex justify-content-between align-items-center">
+    <h4>Profile Visit</h4>
+
+    <select id="chartFilter" class="form-select form-select-sm" style="width:120px;">
+        <option value="monthly">Monthly</option>
+        <option value="weekly">Weekly</option>
+    </select>
+</div>
                         <div class="card-body">
-                            <div id="chart-profile-visit"></div>
+                            <div id="chart-profile-visit" style="min-height: 300px;"></div>
                         </div>
                     </div>
                 </div>
@@ -185,7 +172,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-lg">
+                                <table class="table table-hover align-middle">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
@@ -314,11 +301,32 @@
                 </div>
             </div>
         </div>
+        <div class="card mt-4">
+  <div class="card-header">
+    <h4>Users</h4>
+<small class="text-muted">Latest registered users</small>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody id="usersTable"></tbody>
+    </table>
+  </div>
+</div>
     </section>
 </div>
-{% endblock %}
+
+
+{% endblock %}   <!-- ✅ ONLY ONE content block close -->
+
 {% block js %}
-<!-- Need: Apexcharts -->
-<script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
-<script src="assets/static/js/pages/dashboard.js"></script>
+
+<script type="module" src="/assets/static/js/pages/dashboard.js"></script>
+
 {% endblock %}
