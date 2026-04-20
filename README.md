@@ -37,10 +37,10 @@ The objective was to modify an existing Bootstrap 5 template and integrate dynam
 ## 📸 Screenshots
 
 ### 🌙 Dark Mode
-![Dark Dashboard](src/assets/images/preview)
+![Dark Dashboard](src/assets/images/preview.png)
 
 ### ☀️ Light Mode
-![Light Dashboard](src/assets/images/preview1)
+![Light Dashboard](src/assets/images/preview1.png)
 ### ⚡ Enhancements
 - Animated numbers (count-up effect)
 - Loading shimmer effect
